@@ -9,12 +9,13 @@ s.listen(10)
 print "Server turn on. Listening port 2222..."
 while True:
     conn, addr = s.accept()
-    print 'Connection is established {}{}'.format(*addr)
+    print 'Connection is established {}:{}'.format(*addr)
     while True:
         data = conn.recv(1024)
         if b'close' in data:
             print 'Found "close" in data'
             conn.close()
+            break
         elif not data:
             print 'No data.'
             conn.close()
@@ -22,4 +23,3 @@ while True:
         else:
             print 'Data received: ', data
             conn.send(data)
-            conn.close()
