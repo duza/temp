@@ -37,7 +37,7 @@ while True:
     if pid > 0:#
         print 'parent: ', os.getpid()#
         childs.append(pid)#
-        for p in childs:#
-            pid, status = os.wait()#
-            print 'pid {} - status= {}'.format(pid,
+for p in childs:#
+    pid, status = os.wait()#
+    print 'pid {} - status= {}'.format(pid,
 os.WEXITSTATUS(status))#
