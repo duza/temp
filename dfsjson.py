@@ -31,7 +31,23 @@ def dfs(graph: dict[str, set[str]], start: str) -> set[str]:
     return visited
 
 
+def test_create_graph_and_dfs() -> None:
+    data = [
+        {"name": "A", "parents": []},
+        {"name": "B", "parents": ["A"]},
+        {"name": "C", "parents": ["A"]},
+        {"name": "D", "parents": ["B"]},
+    ]
+
+    graph = create_graph(data)
+
+    assert graph["A"] == {"B", "C"}
+    assert graph["B"] == {"D"}
+    assert dfs(graph, "A") == {"A", "B", "C", "D"}
+    assert dfs(graph, "D") == {"D"}
+
 if __name__ == "__main__":
+    test_create_graph_and_dfs()
     data_json = json.loads(input())
     graph = create_graph(data_json)
     data_json.sort(key=lambda x: x["name"])
